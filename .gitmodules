@@ -1,0 +1,6 @@
+[submodule "myPotrfolio-back"]
+    path = myPotrfolio-back
+    url = https://github.com/CrKot/myPortfolio-back.git
+[submodule "myPotrfolio-front"]
+    path = myPotrfolio-front
+    url = https://github.com/CrKot/myPortfolio-front.git

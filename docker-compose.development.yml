@@ -1,0 +1,48 @@
+version: "3.9"
+
+services:
+  frontend:
+    build:
+      context: ./myPortfolio-front
+      dockerfile: Dockerfile.development
+    container_name: myPortfolio-front
+    volumes:
+      - ./myPortfolio-front/:/myPortfolio/front
+      - /myPortfolio/front/node_modules
+      - /myPortfolio/front/.nuxt
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+
+  backend:
+    build:
+      context: ./myPortfolio-back
+      dockerfile: Dockerfile.development
+    container_name: myPortfolio-back
+    volumes:
+      - ./myPortfolio-back/:/myPortfolio/back/
+      - /myPortfolio/back/node_modules
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:latest
+    container_name: mongodb
+    hostname: mongodb
+    volumes:
+      - .mongodb/data/db/:/data/db/
+      - .mongodb/data/log/:/var/log/mongodb/
+    restart: always
+    env_file:
+      - .env
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${DB_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${DB_PASSWORD}
+      MONGO_INITDB_DATABASE: ${DB_DATABASE}
+    ports:
+      - "27017:27017"
