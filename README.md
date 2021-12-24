@@ -8,7 +8,7 @@
 
 Примеры .env файлов есть в каждом репозитории
 
-#### .env файл в umka-dev
+#### .env файл в myPortfolio-dev
 
     DB_USERNAME=<Указываем имя пользователя для базы данных mongodb>
     DB_PASSWORD=<Указываем пароль для базы данных mongodb>
